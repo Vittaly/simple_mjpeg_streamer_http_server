@@ -27,10 +27,11 @@ import ffmpeg
 from memory_tempfile import MemoryTempfile
 global tempfile
 
-
- 
-tempfile = MemoryTempfile(additional_paths = ['$PREFIX/tmp']).NamedTemporaryFile()
-
+filename = '/data/data/com.termux/files/usr/tmp'
+try: 
+	filename = MemoryTempfile(additional_paths = ['$PREFIX/tmp']).NamedTemporaryFile().name
+except:
+	os.mknod("filename")
 
 class CamHandler(BaseHTTPRequestHandler):
 	def do_GET(self):
@@ -40,7 +41,7 @@ class CamHandler(BaseHTTPRequestHandler):
 				#yuyv422
 				#mjpeg
 				ffmpeg_prc =  (ffmpeg.input('/dev/video0', loglevel="error", format="v4l2", input_format="yuyv422", s='{}x{}'.format(1280, 960))
-					.output( tempfile.name,  format="image2", r = "20",  qscale = "10", update="1").overwrite_output()
+					.output( filename,  format="image2", r = "20",  qscale = "10", update="1").overwrite_output()
 					#vf="fps=fps=25",
 					.run_async())
 			self.send_response(200)
@@ -52,7 +53,7 @@ class CamHandler(BaseHTTPRequestHandler):
 				try:
 					
 					fd = None
-					with open(tempfile.name, 'rb') as memFile:
+					with open(filename, 'rb') as memFile:
 						fd=memFile.read()
 
 					#jpg = Image.fromarray(fd)
