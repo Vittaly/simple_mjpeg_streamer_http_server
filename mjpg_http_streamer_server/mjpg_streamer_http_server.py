@@ -27,7 +27,7 @@ import ffmpeg
 from memory_tempfile import MemoryTempfile
 global tempfile
 
-filename = '/data/data/com.termux/files/usr/tmp'
+filename = '/data/data/com.termux/files/usr/tmp/ffmpeg.tmp'
 try: 
 	filename = MemoryTempfile(additional_paths = ['$PREFIX/tmp']).NamedTemporaryFile().name
 except:
