@@ -27,11 +27,14 @@ import ffmpeg
 from memory_tempfile import MemoryTempfile
 global tempfile
 
-filename = '/data/data/com.termux/files/usr/tmp/ffmpeg.tmp'
+filename = '/data/data/com.termux/files/usr/tmp/ffmpeg_to_http.tmp'
 try: 
 	filename = MemoryTempfile(additional_paths = ['$PREFIX/tmp']).NamedTemporaryFile().name
 except:
-	os.mknod(filename)
+	try:
+		os.mknod(filename)
+	except FileExistsError:
+		pass
 
 class CamHandler(BaseHTTPRequestHandler):
 	def do_GET(self):
