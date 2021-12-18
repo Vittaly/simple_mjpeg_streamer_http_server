@@ -31,7 +31,7 @@ filename = '/data/data/com.termux/files/usr/tmp/ffmpeg.tmp'
 try: 
 	filename = MemoryTempfile(additional_paths = ['$PREFIX/tmp']).NamedTemporaryFile().name
 except:
-	os.mknod("filename")
+	os.mknod(filename)
 
 class CamHandler(BaseHTTPRequestHandler):
 	def do_GET(self):
