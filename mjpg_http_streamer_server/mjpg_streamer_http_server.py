@@ -29,7 +29,7 @@ global tempfile
 
 
  
-tempfile = MemoryTempfile().NamedTemporaryFile()
+tempfile = MemoryTempfile(additional_paths = ['$PREFIX/tmp']).NamedTemporaryFile()
 
 
 class CamHandler(BaseHTTPRequestHandler):
