@@ -11,7 +11,7 @@
 import os
 import ffmpeg
 
-from PIL import Image
+#from PIL import Image
 import threading
 from http.server import BaseHTTPRequestHandler,HTTPServer, ThreadingHTTPServer
 from socketserver import ThreadingMixIn
