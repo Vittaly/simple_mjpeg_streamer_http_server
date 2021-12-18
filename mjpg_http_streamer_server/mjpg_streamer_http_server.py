@@ -69,10 +69,10 @@ class CamHandler(BaseHTTPRequestHandler):
 					self.end_headers()
 					self.wfile.write(fd)
 					time.sleep(0.05)
-				except (KeyboardInterrupt, BrokenPipeError):					
-					break
-					if ffmpeg_prc.is_alive():
+				except (KeyboardInterrupt, BrokenPipeError):			
+					if ffmpeg_prc.poll() == None:
 						ffmpeg_prc.terminate()
+					break
 						
 			return
 		if self.path.endswith('.html'):
